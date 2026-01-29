@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Will you be my Valentine?</title>
+  <style>
+    :root{--bg:#efeeeb;--paper:#fbf9f7;--ink:#1a1a1a;--accent:#b92e48}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:var(--bg);font-family:Georgia,'Times New Roman',Times,serif;color:var(--ink);padding:20px}
+
+    .card{max-width:1100px;margin:0 auto;background:var(--paper);border-top:4px solid #111;border-bottom:4px solid #111;border-radius:6px;padding:clamp(20px,5vw,60px)}
+
+    .intro{text-align:center}
+    h1{margin:6px 0 12px;font-size:clamp(18px,2.2vw,26px)}
+    .typing{font-weight:600;min-height:56px;font-size:clamp(15px,1.8vw,18px)}
+    .lead{margin:12px 0 18px;color:rgba(0,0,0,.72)}
+    .btn{border:0;border-radius:6px;padding:12px 22px;background:linear-gradient(90deg,var(--accent),#ff8aa0);color:#fff;cursor:pointer}
+
+    .paper{display:none;margin-top:20px}
+    .grid{display:grid;grid-template-columns:48% 52%;gap:32px}
+    .photo{width:100%;height:auto;object-fit:contain;border:4px solid rgba(0,0,0,.05);background:#f0eee9}
+
+    .headline{font-size:clamp(28px,4vw,44px);letter-spacing:1.6px;margin-bottom:14px}
+    .story{font-size:clamp(14px,1.9vw,18px);line-height:1.6}
+
+    .rule{height:1px;background:linear-gradient(90deg,rgba(0,0,0,.12),transparent);margin:22px 0}
+
+    .bottom{display:grid;grid-template-columns:1fr 360px;gap:28px}
+
+    .footer-rule{height:6px;background:linear-gradient(90deg,#111 0%,#111 35%,transparent 36%);margin-top:26px}
+
+    .more-wrap{text-align:center;margin-top:28px}
+
+    .forever{display:none;margin-top:40px;text-align:center}
+
+    /* PROPOSAL overlay */
+    .proposal{display:none;position:fixed;inset:0;background:linear-gradient(180deg,#ffd6e0 0%,#ffd2f0 60%);z-index:9999;align-items:center;justify-content:center;overflow:hidden}
+    .proposal .bg-flowers{position:absolute;inset:0;pointer-events:none;opacity:0.25}
+    .proposal-box{background:rgba(255,255,255,0.95);padding:28px;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,0.12);max-width:560px;width:92%;text-align:center;border:2px solid rgba(255,255,255,0.6)}
+    .proposal-box h2{margin:0 0 8px;font-size:28px;color:#6b042e}
+    .proposal-box p{margin:0 0 18px;color:#4a1221}
+    .proposal-actions{display:flex;gap:12px;justify-content:center}
+    .proposal-actions .btn{min-width:120px}
+
+    /* floating emojis/cats/hearts */
+    .float-emoji{position:absolute;font-size:32px;will-change:transform,opacity;animation:floatUp 3500ms ease-out forwards}
+    @keyframes floatUp{0%{transform:translateY(10px) scale(.8);opacity:1}100%{transform:translateY(-700px) scale(1.4);opacity:0}}
+
+    /* small subtle flower pattern using radial-gradients */
+    .flower-shape{position:absolute;width:120%;height:120%;left:-10%;top:-10%;background-image:
+      radial-gradient(circle at 10% 20%, rgba(255,200,215,.12) 0 4px, transparent 5px),
+      radial-gradient(circle at 30% 60%, rgba(255,230,240,.08) 0 6px, transparent 7px),
+      radial-gradient(circle at 70% 40%, rgba(255,200,215,.10) 0 5px, transparent 6px);
+      pointer-events:none}
+
+    @media(max-width:900px){.grid,.bottom{grid-template-columns:1fr}}
+    @media(max-width:420px){.intro{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center}}
+  </style>
+</head>
+<body>
+<main class="card" id="mainCard">
+
+<section class="intro" id="intro">
+  <h1>For my princess 💌</h1>
+  <div class="typing">Hi princess — there is something I wanna ask you, but first let me show you something.</div>
+  <p class="lead">There will be a button below — when you're ready, tap it.</p>
+  <button id="revealBtn" class="btn">Wanna hear it?</button>
+</section>
+
+<section class="paper" id="paper">
+  <div class="grid">
+    <img class="photo" src="mun.jpg" alt="mun photo" />
+    <div>
+      <h2 class="headline">WHEN DESTINY SWIPED RIGHT</h2>
+      <p class="story">i still remember our mun days, innocent us just spending time as much as we can with each other and the 2 days we gone in an instant but i still treasure every moment. it was not the prefect proposal by me — i mean i just said yes after a whole day, but you being a princess made that day special for us.</p>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <div class="bottom">
+    <p class="story">i still remember our first vc on discord — we both were nervous; there were times we were just silent, but i found peace in those silent moments, giving me time to adore you more and more. i have always asked god that i wanna adore you: just give me a life in which i can adore and take care of you. after more than 3 years, i still haven't had enough of you.</p>
+    <img class="photo" src="discord.jpg" alt="discord photo" />
+  </div>
+
+  <div class="footer-rule"></div>
+  <div class="more-wrap"><button id="moreBtn" class="btn">There is still more ↓</button></div>
+</section>
+
+<section class="forever" id="forever">
+  <h2 class="headline">Even if we were anything…</h2>
+  <p class="story" id="foreverText">we would still choose each other.</p>
+  <img id="foreverImg" class="photo" src="dog.png" alt="forever image" style="max-width:420px;margin:0 auto" />
+  <div class="more-wrap"><button id="nowBtn" class="btn">Now 💖</button></div>
+</section>
+
+</main>
+
+<!-- PROPOSAL OVERLAY -->
+<div class="proposal" id="proposal">
+  <div class="flower-shape" aria-hidden="true"></div>
+  <div class="proposal-box" role="dialog" aria-modal="true" aria-labelledby="proposalTitle">
+    <h2 id="proposalTitle">Will you be my Valentine?</h2>
+    <p id="proposalSub">I love you more than words — be my Valentine?</p>
+    <div class="proposal-actions">
+      <button id="noBtn" class="btn" style="background:#999">No 😢</button>
+      <button id="yesBtn" class="btn" style="background:linear-gradient(90deg,#ff7aa8,#ff6380)">Yes 💖</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// core elements
+const revealBtn=document.getElementById('revealBtn');
+const moreBtn=document.getElementById('moreBtn');
+const nowBtn=document.getElementById('nowBtn');
+const intro=document.getElementById('intro');
+const paper=document.getElementById('paper');
+const forever=document.getElementById('forever');
+const foreverImg=document.getElementById('foreverImg');
+const foreverText=document.getElementById('foreverText');
+const proposal=document.getElementById('proposal');
+const noBtn=document.getElementById('noBtn');
+const yesBtn=document.getElementById('yesBtn');
+const mainCard=document.getElementById('mainCard');
+
+// reveal newspaper
+revealBtn.addEventListener('click',()=>{
+  intro.style.display='none';
+  paper.style.display='block';
+  paper.scrollIntoView({behavior:'smooth'});
+});
+
+// slideshow for "forever"
+const slides=[
+  {img:'dog.png',text:'Even if we were dogs… we would still find each other.'},
+  {img:'cat.png',text:'Even if we were cats… we would still nap together.'},
+  {img:'anime.jpg',text:'Even if we were anime characters… I would still fall for you.'},
+  {img:'lion.png',text:'Even if we were lions… I would still stand by you.'}
+];
+let idx=0,intervalStarted=false;
+moreBtn.addEventListener('click',()=>{
+  forever.style.display='block';
+  forever.scrollIntoView({behavior:'smooth'});
+  if(intervalStarted) return;
+  intervalStarted=true;
+  setInterval(()=>{
+    idx=(idx+1)%slides.length;
+    foreverImg.src=slides[idx].img;
+    foreverText.textContent=slides[idx].text;
+  },2500);
+});
+
+// WHEN user clicks "Now" - fade out the existing content using setInterval then show proposal overlay
+nowBtn.addEventListener('click',()=>{
+  // fade main card out smoothly then show proposal
+  let el = mainCard;
+  let op = 1; // initial opacity
+  const fade = setInterval(()=>{
+    op -= 0.08; // fade step
+    if(op <= 0){
+      clearInterval(fade);
+      el.style.display = 'none';
+      showProposal();
+    } else {
+      el.style.opacity = op;
+    }
+  },60);
+});
+
+function showProposal(){
+  proposal.style.display = 'flex';
+  proposal.scrollIntoView({behavior:'smooth'});
+}
+
+// NO handler (runaway button)
+noBtn.addEventListener('mouseenter',()=>{
+  const box = document.querySelector('.proposal-box');
+  const boxRect = box.getBoundingClientRect();
+  const btnRect = noBtn.getBoundingClientRect();
+
+  const maxX = boxRect.width - btnRect.width - 20;
+  const maxY = boxRect.height - btnRect.height - 20;
+
+  const randX = Math.random() * maxX;
+  const randY = Math.random() * maxY;
+
+  noBtn.style.position = 'absolute';
+  noBtn.style.left = randX + 'px';
+  noBtn.style.top = randY + 'px';
+});
+
+noBtn.addEventListener('click',()=>{
+  alert('aisa no bolo :(');
+});
+
+// YES handler: hide box and create cute cat animations
+yesBtn.addEventListener('click',()=>{
+  const box = document.querySelector('.proposal-box');
+  box.querySelector('h2').textContent = 'Yes! 💖';
+  box.querySelector('p').textContent = 'You made me the happiest — I love you.';
+
+  spawnFloating('😻', 18, 120);
+  spawnFloating('💖', 12, 180);
+  spawnFloating('🐾', 10, 220);
+  spawnConfetti(24);
+
+  noBtn.disabled = true;
+  yesBtn.disabled = true;
+});
+
+// helper: spawn floating emoji elements across the screen
+function spawnFloating(char, count, interval){
+  let spawned = 0;
+  const t = setInterval(()=>{
+    if(spawned >= count){ clearInterval(t); return; }
+    createFloating(char);
+    spawned++;
+  }, interval);
+}
+
+function createFloating(char){
+  const s = document.createElement('div');
+  s.className = 'float-emoji';
+  s.textContent = char;
+  // random horizontal start
+  const left = Math.random() * 90 + '%';
+  s.style.left = left;
+  s.style.bottom = '-20px';
+  // random size
+  const size = Math.floor(Math.random()*26) + 24;
+  s.style.fontSize = size + 'px';
+  proposal.appendChild(s);
+  // remove after animation
+  s.addEventListener('animationend',()=> s.remove());
+}
+
+// small confetti effect using circles
+function spawnConfetti(n){
+  for(let i=0;i<n;i++){
+    const el = document.createElement('div');
+    el.style.position='absolute';
+    el.style.left = Math.random()*100 + '%';
+    el.style.top = Math.random()*60 + 20 + '%';
+    el.style.width = el.style.height = (6+Math.random()*10) + 'px';
+    el.style.background = ['#ffd6e0','#ffc8e6','#ffd9b3','#ff8aa0','#ffe6f0'][Math.floor(Math.random()*5)];
+    el.style.borderRadius='50%';
+    el.style.opacity='0.95';
+    el.style.transform='translateY(0)';
+    el.style.transition='transform 1600ms ease-out, opacity 1600ms ease-out';
+    proposal.appendChild(el);
+    setTimeout(()=>{ el.style.transform = 'translateY(120px) rotate('+Math.floor(Math.random()*360)+'deg)'; el.style.opacity='0'; }, 50 + i*40);
+    setTimeout(()=> el.remove(), 1800 + i*40);
+  }
+}
+</script>
+</body>
+</html>
